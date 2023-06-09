@@ -24,10 +24,7 @@ const SignUp = () => {
         body: JSON.stringify(data),
       };
 
-      const result = await fetch(
-        'http://localhost:3000/api/auth/signup',
-        option
-      );
+      const result = await fetch('/api/auth/signup', option);
       console.log(result);
       if (result.ok) {
         toast('User Created Successfully');
