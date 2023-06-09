@@ -8,16 +8,11 @@ import { ErrorMessage } from '@hookform/error-message';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSession } from 'next-auth/react';
 const SignUp = () => {
-  const { data: session, status } = useSession();
   const router = useRouter();
+  const { status } = useSession();
 
-  if (status === 'loading') {
-    return <p>Loading...</p>;
-  }
-
-  if (session) {
+  if (status === 'authenticated') {
     router.push('/');
-    return null;
   }
 
   const {

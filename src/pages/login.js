@@ -9,15 +9,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from 'src/validators/yupValidator';
 const Login = () => {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
-  if (status === 'loading') {
-    return <p>Loading...</p>;
-  }
-
-  if (session) {
+  if (status === 'authenticated') {
     router.push('/');
-    return null;
   }
 
   const handleGoogleLogin = async () => {
