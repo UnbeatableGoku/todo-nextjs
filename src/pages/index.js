@@ -87,11 +87,11 @@ function Todo() {
               </div>
             </form>
           </div>
-          <div className='flex flex-wrap -m-4'>
+          <div className='grid  sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3'>
             {todoList &&
               todoList.length > 0 &&
               todoList.map((item) => (
-                <div className='xl:w-1/3 md:w-1/2 p-4'>
+                <div className='w-full p-4'>
                   <div
                     className={`border border-gray-100 shadow-xl  p-6 rounded-lg transition duration-500 bg-slate-800 ${getBorderColor(
                       item.status
