@@ -60,7 +60,7 @@ const Login = () => {
       flex items-center justify-center'
         >
           <div className='w-full h-100'>
-            <h1 className='text-xl md:text-2xl font-bold leading-tight mt-12'>
+            <h1 className='text-xl md:text-2xl font-bold leading-tight mt-12 text-black'>
               Log in to your account
             </h1>
 

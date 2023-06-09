@@ -53,7 +53,7 @@ const SignUp = () => {
       flex items-center  sm:justify-center'
         >
           <div className='w-full h-100'>
-            <h1 className='text-xl md:text-2xl font-bold leading-tight '>
+            <h1 className='text-xl md:text-2xl font-bold leading-tight text-black'>
               Sign up
             </h1>
 
