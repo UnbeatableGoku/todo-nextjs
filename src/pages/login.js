@@ -75,7 +75,7 @@ const Login = () => {
                 <input
                   type='text'
                   placeholder='Enter User Name'
-                  className='w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none'
+                  className='w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none focus:placeholder-black text-black'
                   {...register('email')}
                 />
                 <ErrorMessage
@@ -93,7 +93,7 @@ const Login = () => {
                   type='password'
                   placeholder='Enter Password'
                   className='w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-              focus:bg-white focus:outline-none'
+              focus:bg-white focus:outline-none focus:placeholder-black text-black'
                   {...register('password')}
                 />
                 <ErrorMessage

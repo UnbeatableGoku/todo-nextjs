@@ -28,8 +28,8 @@ const SignUp = () => {
       console.log(result);
       if (result.ok) {
         toast('User Created Successfully');
-        router.push('https://todo-nextjs-prathmesh.vercel.app/login');
-        // router.push('http://localhost:3000/login');
+        // router.push('https://todo-nextjs-prathmesh.vercel.app/login');
+        router.push('http://localhost:3000/login');
       } else {
         toast.error('User Already Exist');
       }
@@ -63,7 +63,7 @@ const SignUp = () => {
                 <input
                   type='text'
                   placeholder='Enter User Name'
-                  className='w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:placeholder-black focus:bg-white  focus:outline-none'
+                  className='w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:placeholder-black text-black focus:bg-white  focus:outline-none  '
                   {...register('username')}
                 />
                 <ErrorMessage
@@ -80,7 +80,7 @@ const SignUp = () => {
                   type='text'
                   placeholder='Enter Email'
                   className='w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white
-               focus:placeholder-black focus:outline-none'
+                  focus:placeholder-black text-black focus:outline-none'
                   {...register('email')}
                 />
                 <ErrorMessage
@@ -97,7 +97,7 @@ const SignUp = () => {
                   type='password'
                   placeholder='Enter Password'
                   className='w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-              focus:bg-white focus:outline-none focus:placeholder-black'
+              focus:bg-white focus:outline-none focus:placeholder-black text-black'
                   {...register('password')}
                 />
                 <ErrorMessage
