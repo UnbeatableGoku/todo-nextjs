@@ -1,4 +1,4 @@
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -9,6 +9,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from 'src/validators/yupValidator';
 const Login = () => {
   const router = useRouter();
+  const { data: session, status } = useSession();
+
+  if (status === 'loading') {
+    return <p>Loading...</p>;
+  }
+
+  if (session) {
+    router.push('/');
+    return null;
+  }
 
   const handleGoogleLogin = async () => {
     signIn('google', {

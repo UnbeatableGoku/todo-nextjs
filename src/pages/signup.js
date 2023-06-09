@@ -6,7 +6,20 @@ import { toast, Toaster } from 'react-hot-toast';
 import { singupSchema } from 'src/validators/yupValidator';
 import { ErrorMessage } from '@hookform/error-message';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useSession } from 'next-auth/react';
 const SignUp = () => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  if (status === 'loading') {
+    return <p>Loading...</p>;
+  }
+
+  if (session) {
+    router.push('/');
+    return null;
+  }
+
   const {
     register,
     handleSubmit,
@@ -14,7 +27,6 @@ const SignUp = () => {
   } = useForm({
     resolver: yupResolver(singupSchema),
   });
-  const router = useRouter();
   const handleFormSubmit = async (data) => {
     console.log(data);
     try {
