@@ -121,19 +121,22 @@ function Todo() {
                         >
                           <option
                             className='bg-gray-800 text-gray-200'
-                            value={'pending'}
+                            value='pending'
+                            selected={item.status === 'pending'}
                           >
                             Pending
                           </option>
                           <option
                             className='bg-gray-800 text-gray-200'
-                            value={'completed'}
+                            value='completed'
+                            selected={item.status === 'completed'}
                           >
                             Completed
                           </option>
                           <option
                             className='bg-gray-800 text-gray-200'
-                            value={'onGoing'}
+                            value='onGoing'
+                            selected={item.status === 'onGoing'}
                           >
                             OnGoing
                           </option>
