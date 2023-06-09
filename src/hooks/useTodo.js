@@ -18,7 +18,7 @@ const useTodo = ({ todoList, setTodoList }) => {
   const handleTaskSubmit = useCallback(
     async (response) => {
       try {
-        const { data } = await axios.post('http://localhost:3000/api/task', {
+        const { data } = await axios.post('/api/task', {
           response,
         });
         if (data.response) {
@@ -35,7 +35,7 @@ const useTodo = ({ todoList, setTodoList }) => {
 
   const fetchTodoList = useCallback(async () => {
     try {
-      const { data } = await axios.get('http://localhost:3000/api/task');
+      const { data } = await axios.get('/api/task');
       if (data.response.length > 0) {
         setTodoList(data.response);
       }
@@ -47,7 +47,7 @@ const useTodo = ({ todoList, setTodoList }) => {
   const removeTodo = useCallback(
     async (id) => {
       try {
-        const { data } = await axios.delete(`http://localhost:3000/api/${id}`);
+        const { data } = await axios.delete(`/api/${id}`);
         if (data.message === true) {
           const updatedTodo = todoList.filter((item) => item._id !== id);
           setTodoList(updatedTodo);
@@ -64,7 +64,7 @@ const useTodo = ({ todoList, setTodoList }) => {
     async (id, newStatus, oldStatus) => {
       console.log(oldStatus);
       try {
-        const { data } = await axios.put(`http://localhost:3000/api/${id}`, {
+        const { data } = await axios.put(`/api/${id}`, {
           newStatus,
         });
         if (data.message === true) {
