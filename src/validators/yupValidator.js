@@ -5,17 +5,15 @@ export const loginSchema = yup
   .shape({
     email: yup
       .string()
-      .required('Email is required field*')
-      .matches(
-        /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-        'Please enter valid email'
-      ),
+      .email('Please enter a valid email*')
+      .required('Email is a required field*'),
     password: yup
       .string()
-      .required('Password is required field*')
+      .required('Password is a required field*')
+      .min(8, 'Password must be at least 8 characters*')
       .matches(
-        /^(?=.*\d).{8,}$/,
-        'Minimum 8 characters and 1 number is required*'
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+        'Password must contain at least one uppercase letter, one lowercase letter, and one number*'
       ),
   })
   .required();
@@ -23,28 +21,22 @@ export const loginSchema = yup
 export const singupSchema = yup
   .object()
   .shape({
-    name: yup
+    username: yup
       .string()
       .required('Name is a required field*')
-      .matches(/[a-zA-Z]/, 'Only characters are allowed*'),
+      .matches(/^[a-zA-Z]*$/, 'Only characters are allowed*'),
     email: yup
       .string()
-      .required('Email is a required field*')
-      .matches(
-        /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-        'Please enter a valid email*'
-      ),
+      .email('Please enter a valid email*')
+      .required('Email is a required field*'),
     password: yup
       .string()
       .required('Password is a required field*')
+      .min(8, 'Password must be at least 8 characters*')
       .matches(
-        /^(?=.*\d).{8,}$/,
-        'Minimum 8 characters and 1 number are required*'
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+        'Password must contain at least one uppercase letter, one lowercase letter, and one number*'
       ),
-    conpassword: yup
-      .string()
-      .oneOf([yup.ref('password'), null], 'Passwords must match*')
-      .required('Confirm Password is a required field*'),
   })
   .required();
 

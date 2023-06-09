@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { taskSchema } from 'src/validators/yupValidator';
 
 const useTodo = ({ todoList, setTodoList }) => {
@@ -23,6 +24,7 @@ const useTodo = ({ todoList, setTodoList }) => {
         if (data.response) {
           let updatedTodo = [...todoList, { ...data.response }];
           setTodoList(updatedTodo);
+          toast.success('Task Added');
         }
       } catch (error) {
         console.log(error);
@@ -48,8 +50,8 @@ const useTodo = ({ todoList, setTodoList }) => {
         const { data } = await axios.delete(`http://localhost:3000/api/${id}`);
         if (data.message === true) {
           const updatedTodo = todoList.filter((item) => item._id !== id);
-          console.log(updatedTodo);
           setTodoList(updatedTodo);
+          toast.success('Remove Successfully');
         }
       } catch (error) {
         console.log(error);

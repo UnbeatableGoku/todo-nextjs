@@ -1,10 +1,9 @@
-
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { toast } from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
 import { ErrorMessage } from '@hookform/error-message';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from 'src/validators/yupValidator';
@@ -12,7 +11,9 @@ const Login = () => {
   const router = useRouter();
 
   const handleGoogleLogin = async () => {
-    signIn('google', { callbackUrl: 'http://localhost:3000' });
+    signIn('google', {
+      callbackUrl: 'https://todo-nextjs-prathmesh.vercel.app',
+    });
   };
 
   const {
@@ -28,11 +29,13 @@ const Login = () => {
         redirect: false,
         email: data.email,
         password: data.password,
-        callbackUrl: 'http://localhost:3000/',
+        callbackUrl: 'https://todo-nextjs-prathmesh.vercel.app',
       });
       if (result.ok) {
         toast.success('Login Successfully');
         router.push(result.url);
+      } else {
+        toast.error('Wrong Credentials');
       }
     } catch (error) {
       console.log(error);
@@ -176,6 +179,12 @@ const Login = () => {
 };
 
 Login.getLayout = function ErrorLayout(page) {
-  return <>{page}</>;
+  return (
+    <>
+      <Toaster />
+
+      {page}
+    </>
+  );
 };
 export default Login;

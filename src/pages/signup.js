@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { toast, Toaster } from 'react-hot-toast';
 import { singupSchema } from 'src/validators/yupValidator';
 import { ErrorMessage } from '@hookform/error-message';
-const SignIn = () => {
+import { yupResolver } from '@hookform/resolvers/yup';
+const SignUp = () => {
   const {
     register,
     handleSubmit,
@@ -16,6 +16,7 @@ const SignIn = () => {
   });
   const router = useRouter();
   const handleFormSubmit = async (data) => {
+    console.log(data);
     try {
       const option = {
         method: 'POST',
@@ -30,7 +31,9 @@ const SignIn = () => {
       console.log(result);
       if (result.ok) {
         toast('User Created Successfully');
-        router.push('http://localhost:3000/login');
+        router.push('https://todo-nextjs-prathmesh.vercel.app/login');
+      } else {
+        toast.error('User Already Exist');
       }
     } catch (error) {
       console.log(error);
@@ -56,12 +59,7 @@ const SignIn = () => {
               Sign up
             </h1>
 
-            <form
-              className='mt-6'
-              action='#'
-              method='POST'
-              onSubmit={handleSubmit(handleFormSubmit)}
-            >
+            <form className='mt-6' onSubmit={handleSubmit(handleFormSubmit)}>
               <div>
                 <label className='block text-gray-700'>User Name</label>
                 <input
@@ -112,7 +110,7 @@ const SignIn = () => {
                   )}
                 ></ErrorMessage>
               </div>
-              <div className='mt-4'>
+              {/* <div className='mt-4'>
                 <label className='block text-gray-700'>Confirm Password</label>
                 <input
                   type='password'
@@ -128,14 +126,14 @@ const SignIn = () => {
                     <p className='text-sm pt-1 text-red-600'>{message}</p>
                   )}
                 ></ErrorMessage>
-              </div>
+              </div> */}
 
               <button
                 type='submit'
                 className='w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
-            px-4 py-3 mt-6'
+                px-4 py-3 mt-6'
               >
-                Sign In
+                Sign Up
               </button>
             </form>
 
@@ -154,7 +152,12 @@ const SignIn = () => {
   );
 };
 
-SignIn.getLayout = function ErrorLayout(page) {
-  return <>{page}</>;
+SignUp.getLayout = function ErrorLayout(page) {
+  return (
+    <>
+      <Toaster />
+      {page}
+    </>
+  );
 };
-export default SignIn;
+export default SignUp;
