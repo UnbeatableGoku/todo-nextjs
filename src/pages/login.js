@@ -13,6 +13,7 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     signIn('google', {
       callbackUrl: 'https://todo-nextjs-prathmesh.vercel.app',
+      // callbackUrl: 'http://localhost:3000',
     });
   };
 
@@ -30,6 +31,7 @@ const Login = () => {
         email: data.email,
         password: data.password,
         callbackUrl: 'https://todo-nextjs-prathmesh.vercel.app',
+        // callbackUrl: 'http://localhost:3000',
       });
       if (result.ok) {
         toast.success('Login Successfully');

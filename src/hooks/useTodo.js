@@ -15,6 +15,7 @@ const useTodo = ({ todoList, setTodoList }) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(taskSchema) });
   const router = useRouter();
+
   const handleTaskSubmit = useCallback(
     async (response) => {
       try {

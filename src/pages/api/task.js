@@ -6,12 +6,10 @@ import { getToken } from 'next-auth/jwt';
 export default async function handler(req, res) {
   connectMongo().catch((error) => res.json({ error }));
   const token = await getToken({ req, secret: process.env.JWT_SECRET });
-
   if (!token) {
     return res.status(401).json({ error: 'unAuthorized User', ok: false });
   }
   if (req.method === 'POST') {
-    console.log(req.body);
     const {
       response: { title },
       response: { description },
@@ -24,15 +22,16 @@ export default async function handler(req, res) {
 
     //check exsiting task schema
     const exsitingTask = await UserTask.findOne({ email });
-
+    console.log(exsitingTask);
     if (!exsitingTask) {
       const result = await UserTask.create({ email });
+      console.log(result, 'this is first result');
       if (result.task.length === 0) {
         result.task.push(newTask);
         result.save();
-        return result;
+        console.log(result, 'this is first result');
+        return res.status(200).json({ response: result.task[0] });
       }
-      res.status(200).json({ response: result });
     } else {
       exsitingTask.task.push(newTask);
       exsitingTask.save();

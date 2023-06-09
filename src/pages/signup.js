@@ -29,6 +29,7 @@ const SignUp = () => {
       if (result.ok) {
         toast('User Created Successfully');
         router.push('https://todo-nextjs-prathmesh.vercel.app/login');
+        // router.push('http://localhost:3000/login');
       } else {
         toast.error('User Already Exist');
       }
