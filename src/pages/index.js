@@ -29,6 +29,17 @@ function Todo() {
     router.push('/login');
     return null;
   }
+  const getBorderColor = (status) => {
+    if (status === 'pending') {
+      return ' border-4 border-yellow-500 shadow-yellow-400';
+    } else if (status === 'ongoing') {
+      return 'border-4 border-blue-500 shadow-blue-400';
+    } else if (status === 'completed') {
+      return 'border-4 border-green-400 shadow-green-400';
+    } else {
+      return 'border-4 border-purple-400 shadow-purple-400';
+    }
+  };
 
   return (
     <div className=' px-5 mx-auto text-gray-400 bg-gray-700 '>
@@ -37,12 +48,12 @@ function Todo() {
       </div>
       <section className='text-gray-400 body-font'>
         <div className='container px-5 py-24 mx-auto '>
-          <div className='flex flex-col sm:flex-row  justify-center items-center  mb-20 max-w-xl p-10 m-auto  border border-slate-100'>
+          <div className='flex flex-col sm:flex-row  justify-center items-center  mb-20 max-w-xl p-10 m-auto   border-slate-100 hover:shadow-2xl transition duration-1000 rounded-3xl  hover:shadow-zinc-100 cursor-pointer  ='>
             <form onSubmit={handleSubmit(handleTaskSubmit)}>
               <div>
                 <div className='pb-4'>
                   <input
-                    className='bg-transparent border-b p-2'
+                    className='bg-transparent border-b p-2 '
                     placeholder='Title'
                     {...register('title')}
                   ></input>
@@ -56,7 +67,7 @@ function Todo() {
                 </div>
                 <div className='pt-4'>
                   <input
-                    className='bg-transparent border-b p-2'
+                    className='bg-transparent border-b p-2 '
                     placeholder='Description'
                     {...register('description')}
                   ></input>
@@ -70,7 +81,7 @@ function Todo() {
                 </div>
               </div>
               <div className='pt-4 '>
-                <button className='border-2 p-2 w-full hover:bg-slate-100 hover:text-slate-800'>
+                <button className='border-2 p-2 w-full hover:bg-slate-100 hover:text-slate-800 shadow-md shadow-orange-50'>
                   SUBMIT
                 </button>
               </div>
@@ -81,7 +92,11 @@ function Todo() {
               todoList.length > 0 &&
               todoList.map((item) => (
                 <div className='xl:w-1/3 md:w-1/2 p-4'>
-                  <div className='border border-gray-100 p-6 rounded-lg bg-slate-800'>
+                  <div
+                    className={`border border-gray-100 shadow-xl  p-6 rounded-lg transition duration-500 bg-slate-800 ${getBorderColor(
+                      item.status
+                    )}`}
+                  >
                     <div className='w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4'>
                       <svg
                         fill='none'
@@ -137,12 +152,14 @@ function Todo() {
                           </svg>
                         </span>
                       </div>
-                      <button
-                        onClick={() => removeTodo(item._id)}
-                        className='transiton ms-3 inline-flex h-9 w-9 items-center justify-center rounded-md border border-gray-700 text-xl text-red-500 duration-300 hover:bg-red-500 hover:text-gray-100'
-                      >
-                        <AiTwotoneDelete />
-                      </button>
+                      {item && item.status && item.status === 'completed' && (
+                        <button
+                          onClick={() => removeTodo(item._id)}
+                          className='transiton ms-3 inline-flex h-9 w-9 items-center justify-center rounded-md border border-gray-700 text-xl text-red-500 duration-300 hover:bg-red-500 hover:text-gray-100'
+                        >
+                          <AiTwotoneDelete />
+                        </button>
+                      )}
                     </div>
                     <h2 className='text-lg text-gray-200 font-medium title-font mb-2'>
                       {item.title}
