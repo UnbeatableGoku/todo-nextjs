@@ -1,6 +1,6 @@
 import Header from '@components/header/Header';
 import { SessionProvider } from 'next-auth/react';
-import { Toaster } from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
 
 import '@styles/globals.css';
 function MyApp({ Component, pageProps }) {
@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }) {
       </SessionProvider>
     );
   }
+
   return (
     <>
       <SessionProvider session={pageProps.session}>

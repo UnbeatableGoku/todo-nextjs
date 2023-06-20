@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import CredentialsProvider from 'next-auth/providers/credentials'; 
 import connectMongo from 'database/config';
 import Users from 'models/Schema';
 import { compare } from 'bcrypt';
